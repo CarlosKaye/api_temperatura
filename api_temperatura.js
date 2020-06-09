@@ -48,8 +48,8 @@ app.post('/agregarTemperatura', asyncHandler( async(req, res, next) => {
 //---------POST-Obtener-Temperatura------------------//
 app.post('/obtenerTemperatura',asyncHandler(async(req,res,next)=>{
     if(! 'Z'.includes(req.body['FI'])){
-        req.body.FI=req.body['FI']+'.000Z';
-        req.body.FF=req.body['FF']+'.000Z';
+        req.body.FI=req.body['FI']+'Z';
+        req.body.FF=req.body['FF']+'Z';
     }
     var Tipo = req.body.Tipo
     var FI = req.body.FI
@@ -69,7 +69,7 @@ app.post('/obtenerTemperatura',asyncHandler(async(req,res,next)=>{
     }
     //------------Obtener-Rango------------------------//
 
-    if(Tipo == "Rango"){
+    else if(Tipo == "Rango"){
        Tabla.find({NoCo: req.body['NoCo']+"", Fecha:{
             $gte: new Date(FI),
             $lt: new Date(FF)
